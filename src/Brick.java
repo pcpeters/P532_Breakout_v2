@@ -70,4 +70,8 @@ public class Brick extends GameObject{
 	public void setDestroyed(boolean destroyed) {
 		this.destroyed = destroyed;
 	}
+	
+	public void reset() {
+		setDestroyed(false);
+	}
 }

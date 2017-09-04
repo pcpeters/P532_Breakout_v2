@@ -14,23 +14,24 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
 	private Ball ball;
 	private Paddle paddle;
 	private Clock clock;
-	private Brick[][] brick = new Brick[Constants.BRICK_COLUMNS][Constants.BRICK_ROWS];
+	private static Brick[][] brick = new Brick[Constants.BRICK_COLUMNS][Constants.BRICK_ROWS];
 	
-	private Thread game;
+	static Thread game;
 	
-	private volatile boolean isPaused = true;
+	private volatile boolean isPaused = false;
 	private boolean gameOver = false;
 	
 	//Constructor
-	public BreakoutUI(int width, int height ){
+	public BreakoutUI(int width, int height){
 		
 		super.setSize(width, height);		
 		addKeyListener(new UIListener());
+		addKeyListener(new StartOrRestart());
 		setFocusable(true);		
 		setBackground(Color.WHITE);
 		
-		paddle = new Paddle(Constants.PADDLE_X_START, Constants.PADDLE_Y_START, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Color.BLUE);		
-        ball = new Ball(Constants.BALL_X_START, Constants.BALL_Y_START, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Color.GREEN);
+		paddle = new Paddle(Constants.PADDLE_X_START, Constants.PADDLE_Y_START, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Color.GRAY);		
+        ball = new Ball(Constants.BALL_X_START, Constants.BALL_Y_START, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Color.BLACK);
         clock = new Clock(getWidth() - 100, getHeight() - 30, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Color.RED);
         makeBricks();        
         
@@ -46,12 +47,12 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
 
 
 	// Fills the array of bricks
-    private void makeBricks() {
+    static void makeBricks() {
         for (int i = 0; i < Constants.BRICK_COLUMNS; i++) {
             for (int j = 0; j < Constants.BRICK_ROWS; j++) {
                 brick[i][j] = new Brick((i * Constants.BRICK_WIDTH),
                         ((j * Constants.BRICK_HEIGHT) + (Constants.BRICK_HEIGHT / 2)),
-                        Constants.BRICK_WIDTH - 5, Constants.BRICK_HEIGHT - 5, Color.YELLOW);
+                        Constants.BRICK_WIDTH - 5, Constants.BRICK_HEIGHT - 5, Color.GRAY);
             }
         }
     }
@@ -65,15 +66,15 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
     private void stop() {
         isPaused = true;
     }
-
+    
+    
     
 	@Override
 	public void run() {
 		
-		while (true) {
-			
-			while(!isPaused){
-				
+		while(true) {
+		
+			while(!isPaused && !StartOrRestart.SORclicked){
 				int x = ball.getX();
 	            int y = ball.getY();
 
@@ -89,13 +90,12 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}			
-			}			
+			}	
 		}
 	}
 	
 	@Override
-	public void paintComponent(Graphics g)
-	{
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		paddle.draw(g);
 		ball.draw(g);
@@ -107,12 +107,19 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
             }
         }
 		
+		if(StartOrRestart.beginMove) {
+			g.setColor(Color.BLACK);
+			g.setFont(new Font("TimesRoman", Font.PLAIN, 30)); 
+			g.drawString("Press Start!", getWidth() /3, getHeight()/2);
+		}
+		
 		if(gameOver){
 			g.setColor(Color.RED);
 			g.setFont(new Font("TimesRoman", Font.PLAIN, 30)); 
 			g.drawString("Game Over!", getWidth() /3, getHeight()/2);
 			
 		}
+		g.dispose();
 	}
 
 	private void checkWall(int x, int y) {
@@ -208,7 +215,7 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
 		@Override
 		public void keyPressed(KeyEvent ke) {
 			
-			int key = ke.getKeyCode();
+		int key = ke.getKeyCode();
 			
 			//To start or pause the game
 			if (key == KeyEvent.VK_SPACE) {
