@@ -41,7 +41,7 @@ public class StartOrRestart extends KeyAdapter {
 		if (key == KeyEvent.VK_S) {
 				start(); //Plays the game
 				
-		} if(key == KeyEvent.VK_D) {
+		} if(key == KeyEvent.VK_S &&SORisDoublePressed(ke) && lastKeyPressedCode == ke.getKeyCode()) {
 				//reset to initial state if double clicked
 				stop();
 				resetAll();
