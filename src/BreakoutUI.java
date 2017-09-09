@@ -1,13 +1,17 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
-public class BreakoutUI extends JPanel implements Subject, Runnable {
+public class BreakoutUI extends JPanel implements Subject, ActionListener, KeyListener {
 	
 	private List<Observer> observers;
 
@@ -16,7 +20,9 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
 	private Clock clock;
 	private Brick[][] brick = new Brick[Constants.BRICK_COLUMNS][Constants.BRICK_ROWS];
 	
-	private Thread game;
+	//private Thread game;
+	
+	private final Timer timer; 
 	
 	private volatile boolean isPaused = true;
 	private boolean gameOver = false;
@@ -25,8 +31,9 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
 	public BreakoutUI(int width, int height ){
 		
 		super.setSize(width, height);		
-		addKeyListener(new UIListener());
+		//addKeyListener(new UIListener());
 		setFocusable(true);		
+		setFocusTraversalKeysEnabled(false);
 		setBackground(Color.WHITE);
 		
 		paddle = new Paddle(Constants.PADDLE_X_START, Constants.PADDLE_Y_START, Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT, Color.BLUE);		
@@ -34,14 +41,18 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
         clock = new Clock(getWidth() - 100, getHeight() - 30, Constants.BALL_WIDTH, Constants.BALL_HEIGHT, Color.RED);
         makeBricks();        
         
-        addKeyListener(null);
+        addKeyListener(this);
         
         observers = new ArrayList<Observer>();
         register(ball);
         register(clock);
         
-        game = new Thread(this);
-        game.start();
+        timer = new Timer(5, this);
+        
+        //game = new Thread(this);
+        //game.start();
+        
+        //timer.start();
 	}
 
 
@@ -56,6 +67,7 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
         }
     }
 	
+    /*
 	//Start thread
     private void start() {
         isPaused = false;
@@ -64,9 +76,10 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
     //Stop thread
     private void stop() {
         isPaused = true;
-    }
+    }*/
 
     
+    /*
 	@Override
 	public void run() {
 		
@@ -78,7 +91,6 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
 	            int y = ball.getY();
 
 	            checkWall(x, y);
-	            //checkIfOut(y);
 	            checkPaddle(x, y);
 	            brickCollisionCheck(x, y);
 				notifyObserver();
@@ -91,7 +103,7 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
 				}			
 			}			
 		}
-	}
+	}*/
 	
 	@Override
 	public void paintComponent(Graphics g)
@@ -137,7 +149,7 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
 		     if (y >= getHeight()) {
 		    	 //ball.setyDir(-1);
 		    	 gameOver=true;
-		    	 stop();
+		    	 //stop();
 		     }			 
 		 }		 
 	 }
@@ -203,6 +215,7 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
 		
 	}
 	
+	/*
 	private class UIListener extends KeyAdapter {
 		
 		@Override
@@ -213,10 +226,10 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
 			//To start or pause the game
 			if (key == KeyEvent.VK_SPACE) {
 				if(!isPaused){
-					stop();
+					//stop();
 				}
 				else{
-					start();
+					//start();
 				}
 			}
 
@@ -228,6 +241,59 @@ public class BreakoutUI extends JPanel implements Subject, Runnable {
 				paddle.setX(paddle.getX() + 50);
 			}
 		}
+	}*/
+
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		//while (true) {
+			
+			//while(!isPaused){
+				
+				int x = ball.getX();
+	            int y = ball.getY();
+
+	            checkWall(x, y);
+	            checkPaddle(x, y);
+	            brickCollisionCheck(x, y);
+				notifyObserver();
+				repaint();	
+			//}			
+		//}		
 	}
+
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+		
+	}
+
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+		
+
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			paddle.setX(paddle.getX() - 50);
+		}
+		
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			paddle.setX(paddle.getX() + 50);
+		}
+	
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }
