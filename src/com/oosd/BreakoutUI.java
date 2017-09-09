@@ -1,20 +1,97 @@
 package com.oosd;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
-public class BreakoutUI extends JPanel {
+
+public class BreakoutUI extends JFrame {
 	
-
-
+	private GameBoard game;
+	private Menu menu;
+	private MenuButtons menuButtons;
 	
+	GameObservable observable;
+	
+	public BreakoutUI(){
+		
+		game = new GameBoard();
+		//menuButtons = new MenuButtons(game);
+		
+		setMinimumSize(this.getSize());
+		
+	}
+
+
+	private void init(GameBoard game, Menu menu){
+		
+		setLayout(new BorderLayout());
+		add(game);
+		//add(menu, BorderLayout.SOUTH);
+		pack();
+		setTitle("Breakout");
+		setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+		setResizable(true);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
+	
+	//Getter and Setters
+	public GameBoard getGame() {
+		return game;
+	}
+
+
+	public void setGame(GameBoard game) {
+		this.game = game;
+	}
+
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+
+	public void setMenu(Menu menu) {
+		this.menu = menu;
+	}
+
+
+	public MenuButtons getMenuButtons() {
+		return menuButtons;
+	}
+
+
+	public void setMenuButtons(MenuButtons menuButtons) {
+		this.menuButtons = menuButtons;
+	}
+
+
+	public GameObservable getObservable() {
+		return observable;
+	}
+
+
+	public void setObservable(GameObservable observable) {
+		this.observable = observable;
+	}
+
+
+	public static void main(String[] args){
+		
+		EventQueue.invokeLater(new Runnable(){
+
+			@Override
+			public void run() {
+				BreakoutUI breakoutUI = new BreakoutUI();
+				breakoutUI.setVisible(true);
+				//breakoutUI.getMenuButtons()
+				
+			}
+		
+			
+		});
+		
+	}
 }
