@@ -11,7 +11,7 @@ public class Breakout
 
 		frame = new JFrame("Breakout: The Beginnings");
 		frame.setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
-		ui = new BreakoutUI(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
+		//ui = new BreakoutUI(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
 		frame.getContentPane().add(ui);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
