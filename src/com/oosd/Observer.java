@@ -1,3 +1,4 @@
+package com.oosd;
 
 public interface Observer {
 
