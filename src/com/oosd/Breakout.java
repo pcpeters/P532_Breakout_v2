@@ -13,6 +13,12 @@ public class Breakout extends JFrame implements Constants
     private GameTimer clock;
     GameObservable gameObservable;
 
+    /*
+     * Function Name: Breakout
+     * Parameters In: None
+     * Parameters Out: None
+     * Description: Instantiated object of class Breakout
+     */
     public Breakout()
     {
 	   	game = new GameBoard();
@@ -23,7 +29,14 @@ public class Breakout extends JFrame implements Constants
 	    initUI(game, menu);
 	    setMinimumSize(this.getSize());
     }
-	    
+	   
+    /*
+     * Function Name: initUI
+     * Parameters In: Object of user-defined classes GameBoard and MenuBoard
+     * Parameters Out: None
+     * Description: Sets the layout, adds the GameBoard,adds MenuBoard and sets title, size and other
+     * 				features.
+     */
 	private void initUI(GameBoard game, MenuBoard menu) 
 	{
 		setLayout(new BorderLayout());
@@ -36,6 +49,12 @@ public class Breakout extends JFrame implements Constants
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
+	/*
+     * Function Name: main
+     * Parameters In: Command line arguments
+     * Parameters Out: None
+     * Description: Runs the main thread of the project.
+     */
 	public static void main(String[] args) 
 	{
 		EventQueue.invokeLater(new Runnable() {
@@ -51,8 +70,10 @@ public class Breakout extends JFrame implements Constants
 	    });
 	}
 	
-	//Getters and Setters
-	
+	/*
+     * Function Name: Getters and Setters for various member variables
+     * Description: Returns the variable in case of getters and assign in case of setters
+     */
 	public GameObservable getTimerObs()
 	{
 		return gameObservable;

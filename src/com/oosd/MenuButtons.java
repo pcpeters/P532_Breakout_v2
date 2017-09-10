@@ -33,7 +33,13 @@ public class MenuButtons extends JPanel implements Observer
 	public JButton replay_bt = new JButton("Replay");
 	public JButton quit_bt = new JButton("Quit");
 
-	
+
+	/*
+     * Function Name: MenuButtons
+     * Parameters In: GameBoard
+     * Parameters Out: None
+     * Description: Adds buttons and corresponding on click events.
+     */
 	public MenuButtons(final GameBoard game) 
 	{
 		setStart(false);
@@ -169,6 +175,13 @@ public class MenuButtons extends JPanel implements Observer
 		setBackground(Color.black);
 	}
 	
+	
+	/*
+     * Function Name: update
+     * Parameters In: Observable,Object
+     * Parameters Out: None
+     * Description: Updates the observer.
+     */
 	@Override
 	public void update(Observable o, Object objList) 
 	{
@@ -179,8 +192,12 @@ public class MenuButtons extends JPanel implements Observer
 		}
 	}
 	
-	//Getters and Setters
-	
+
+	/*
+     * Parameters In: Only in case of setters
+     * Parameters Out: Only in case of getters
+     * Description: Getters and Setters for class members.
+     */
 	public boolean isPaused() {
 		return isPaused;
 	}
