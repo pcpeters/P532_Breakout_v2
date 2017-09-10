@@ -16,6 +16,12 @@ public class GameTimer implements Observer
 	JPanel jp = new JPanel();
 	JLabel time = new JLabel("00:00");
 
+	/*
+     * Function Name: GameTimer
+     * Parameters In: None
+     * Parameters Out: None
+     * Description: Initializes object of GameTimer.
+     */
 	public GameTimer()
 	{
 		FlowLayout layout = new FlowLayout();
@@ -26,7 +32,13 @@ public class GameTimer implements Observer
 		jp.setBackground(Color.black);
 	}
 
-	//Observer updates itself
+	/*
+     * Function Name: update
+     * Parameters In: Observable,Object
+     * Parameters Out: None
+     * Description: Observer updates itself.
+     */
+	
 	@Override
 	public void update(Observable oservable, Object objectList)
 	{

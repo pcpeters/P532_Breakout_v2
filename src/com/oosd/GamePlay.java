@@ -18,6 +18,12 @@ public class GamePlay implements Constants
 	private int gameFlag; // 0 - init, 1 - start, 2 - gameover
 	
 
+	/*
+     * Function Name: GamePlay
+     * Parameters In: None
+     * Parameters Out: None
+     * Description: Initializes a paddle, a ball and bricks and draws the bricks.
+     */
 	public GamePlay()
 	{
 		this.ball = new Ball(BALL_X_START, BALL_Y_START, BALL_WIDTH, BALL_HEIGHT, Color.BLACK);
@@ -29,6 +35,11 @@ public class GamePlay implements Constants
 	}
 
 
+	/*
+     * Parameters In: Only in case of setters
+     * Parameters Out: Only in case of getters
+     * Description: Getters and Setters for class members.
+     */
 	public int getCurrentSecond()
 	{
 		return currentSecond;
@@ -58,20 +69,12 @@ public class GamePlay implements Constants
 	{
 		this.timeForGameTimer = timeForDisplayClock;
 	}
-
-	/*
-	 * @return returns the timer tick for the clock. This is useful when clock
-	 * is to be updated after every 1000ms while the game is to be updated after
-	 * every 10ms
-	 */
+	
 	public int getTimerTracker() 
 	{
 		return timerTracker;
 	}
 
-	/*
-	 * @param timeTracker sets the timeTracker with the current timer tick
-	 */
 	public void setTimerTracker(int timerTracker) 
 	{
 		this.timerTracker = timerTracker;
@@ -126,7 +129,14 @@ public class GamePlay implements Constants
 	{
 		this.layoutState = layoutState;
 	}
-
+	
+	
+	/*
+     * Function Name: makeBricks
+     * Parameters In: None
+     * Parameters Out: None
+     * Description: Creates different objects of brick and paints them on canvas.
+     */
 	private void makeBricks() 
 	{
 		int brickIndex = 0;
@@ -140,6 +150,12 @@ public class GamePlay implements Constants
 		}
 	}
 
+	/*
+     * Function Name: getGameObjectList
+     * Parameters In: None
+     * Parameters Out: None
+     * Description: Adds objects of flag, ball, bricks, paddle, timer and layout in the list.
+     */
 	public ArrayList<Object> getGameObjectList() 
 	{
 		ArrayList<Object> gameObjectList = new ArrayList<Object>();
@@ -154,7 +170,13 @@ public class GamePlay implements Constants
 		return gameObjectList;
 	}
 
-	//List of brick status to check is brick is destroyed
+	/*
+     * Function Name: getBrickFlags
+     * Parameters In: None
+     * Parameters Out: ArrayList<Boolean>
+     * Description: List of brick status to check is brick is destroyed.
+     */
+	
 	public ArrayList<Boolean> getBrickFlags() 
 	{
 		ArrayList<Boolean> brickFlags = new ArrayList<Boolean>();
@@ -165,7 +187,12 @@ public class GamePlay implements Constants
 		return brickFlags;
 	}
 
-	//Get game state of every object in a list
+	/*
+     * Function Name: getGameStateList
+     * Parameters In: None
+     * Parameters Out: GameState
+     * Description: Get game state of every object in a list.
+     */
 	public GameState getGameStateList() 
 	{
 		GameState gameStateList = new GameState(this.getBall().getX(),
@@ -179,6 +206,12 @@ public class GamePlay implements Constants
 		return gameStateList;
 	}
 
+	/*
+     * Function Name: saveGameState
+     * Parameters In: GameState
+     * Parameters Out: None
+     * Description: Sets the location of all game objects.
+     */
 	public void saveGameState(GameState gameStateList) 
 	{
 		//Save state of ball
@@ -205,8 +238,13 @@ public class GamePlay implements Constants
 			this.bricks[i].setDestroyed(getBrickFlags.get(i));
 		}
 	}
-
-	//Move game ball and paddle
+	
+	/*
+     * Function Name: moveGameObjects
+     * Parameters In: None
+     * Parameters Out: None
+     * Description: Move game ball and paddle.
+     */
 	public void moveGameObjects() 
 	{
 		if (this.getGameFlag() == 1) 
@@ -218,18 +256,35 @@ public class GamePlay implements Constants
 		}
 	}
 
+	/*
+     * Function Name: refresh
+     * Parameters In: None
+     * Parameters Out: None
+     * Description: Update or refresh the timer variables.
+     */
 	private void refresh() 
 	{
 		currentMinute++;
 		currentSecond = 0;
 	}
 
+	/*
+     * Function Name: start
+     * Parameters In: None
+     * Parameters Out: None
+     * Description: Update or refresh current minute.
+     */
 	public void start() 
 	{
 		currentMinute++;
 	}
 
-	//Clock reset
+	/*
+     * Function Name: reset
+     * Parameters In: None
+     * Parameters Out: None
+     * Description: Resets the clock.
+     */
 	public void reset() 
 	{
 		currentMinute = -1;
@@ -238,6 +293,12 @@ public class GamePlay implements Constants
 		timerTracker = 0;
 	}
 
+	/*
+     * Function Name: updateGameTimer
+     * Parameters In: None
+     * Parameters Out: None
+     * Description: Updated the game timer.
+     */
 	public String updateGameTimer() 
 	{
 		timerTracker++;
@@ -254,6 +315,12 @@ public class GamePlay implements Constants
 		return timeForGameTimer;
 	}
 
+	/*
+     * Function Name: checkCollision
+     * Parameters In: None
+     * Parameters Out: None
+     * Description: Checks the game over and ball collision with the paddle.
+     */
 	public void checkCollision() 
 	{
 		//Game over
@@ -272,9 +339,6 @@ public class GamePlay implements Constants
 		for (int i = 0; i < this.bricks.length; i++) 
 		{
 			//ball collides with brick
-			
-			
-			
 			if ((ball.getRectangle()).intersects(bricks[i].getRectangle())) 
 			{
 				int ballLeft = (int) ball.getRectangle().getMinX();

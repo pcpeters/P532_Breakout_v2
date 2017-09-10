@@ -12,8 +12,11 @@ public class GameObjectCoordinates
 	private ArrayList<Boolean> isBrickDestroyed;
 
 	
-	//Getters and Setters
-	
+	/*
+     * Parameters In: Only in case of setters
+     * Parameters Out: Only in case of getters
+     * Description: Getters and Setters for class members.
+     */
 	public int getBallX()
 	{
 		return ballX;

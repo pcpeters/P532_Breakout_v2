@@ -9,6 +9,12 @@ public class GameObjects implements Constants
     protected int x, y, width, height;
     protected Color color;
 
+    /*
+     * Function Name: GameObjects
+     * Parameters In: Location, size and color of any game object (paddle/ball/bricks)
+     * Parameters Out: None
+     * Description: Initializes the game object.
+     */
     public GameObjects(int x, int y, int width, int height, Color color) 
     {
         setX(x);
@@ -18,13 +24,23 @@ public class GameObjects implements Constants
         setColor(color);
     }
 
+    /*
+     * Function Name: draw
+     * Parameters In: Graphics
+     * Parameters Out: None
+     * Description: Draws the object on the canvas
+     */
     public void draw(Graphics g)
     {
         g.setColor(color);
         g.fillRect(x, y, width, height);
     }
 
-    // Getters and Setters
+    /*
+     * Parameters In: Only in case of setters
+     * Parameters Out: Only in case of getters
+     * Description: Getters and Setters for class members.
+     */
     public void setX(int x)
     {
         this.x = x;

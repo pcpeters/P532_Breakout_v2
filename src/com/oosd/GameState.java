@@ -18,6 +18,37 @@ public class GameState implements Serializable
 	private String setTimeForDisplayClock;
 	private int layoutState;	//layout 0-flow 1-border 2-grid
 
+	
+
+	/*
+     * Function Name: GameState
+     * Parameters In: Coordinated for ball and paddle, speed of ball movement,game flag, time, brick state
+     * Parameters Out: None
+     * Description: Initializes object of GameState.
+     */
+	public GameState(int ballX, int ballY, int ballXDir, int ballYDir, int paddleX, int paddleY,
+			int gameFlag, String timeForDisplayClock,
+			ArrayList<Boolean> isBrickDestroyed, int layoutState)
+	{
+		this.ballX = ballX;
+		this.ballY = ballY;
+		this.ballXDir = ballXDir;
+		this.ballYDir = ballYDir;
+		this.paddleX = paddleX;
+		this.paddleY = paddleY;
+		this.isBrickDestroyed = isBrickDestroyed;
+		setGameFlag(gameFlag);
+		setSetTimeForDisplayClock(timeForDisplayClock);
+		setLayoutState(layoutState);
+	}
+
+	
+	/*
+     * Parameters In: Only in case of setters
+     * Parameters Out: Only in case of getters
+     * Description: Getters and Setters for class members.
+     */
+	
 	public int getLayoutState()
 	{
 		return layoutState;
@@ -48,23 +79,7 @@ public class GameState implements Serializable
 		this.setTimeForDisplayClock = setTimeForDisplayClock;
 	}
 
-	public GameState(int ballX, int ballY, int ballXDir, int ballYDir, int paddleX, int paddleY,
-			int gameFlag, String timeForDisplayClock,
-			ArrayList<Boolean> isBrickDestroyed, int layoutState)
-	{
-		this.ballX = ballX;
-		this.ballY = ballY;
-		this.ballXDir = ballXDir;
-		this.ballYDir = ballYDir;
-		this.paddleX = paddleX;
-		this.paddleY = paddleY;
-		this.isBrickDestroyed = isBrickDestroyed;
-		setGameFlag(gameFlag);
-		setSetTimeForDisplayClock(timeForDisplayClock);
-		setLayoutState(layoutState);
-	}
-
-	//Getters and Setters
+	
 	public int getBallX()
 	{
 		return ballX;

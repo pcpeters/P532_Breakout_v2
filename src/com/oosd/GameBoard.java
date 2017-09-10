@@ -27,6 +27,12 @@ public class GameBoard extends JPanel implements Constants, Observer
 	private int loadGameFlag;	//True is game loaded
 	LinkedList<Object> listFromFile;
 
+	 /*
+     * Function Name: GameBoard
+     * Parameters In: None
+     * Parameters Out: None
+     * Description: Constructor to initialize the GameBoard object
+     */
 	public GameBoard()
 	{
 		addKeyListener(new TAdapter());
@@ -37,6 +43,11 @@ public class GameBoard extends JPanel implements Constants, Observer
 		setBackground(Color.white);
 	}
 
+	 /*
+     * Parameters In: Only in case of setters
+     * Parameters Out: Only in case of getters
+     * Description: Getters and Setters for class members
+     */
 	public int getLoadGameFlag()
 	{
 		return loadGameFlag;
@@ -97,6 +108,11 @@ public class GameBoard extends JPanel implements Constants, Observer
 		this.gameFlag = gameFlag;
 	}
 
+	
+	/*
+     * Class Name: TAdapter
+     * Description: Handles all key events of KeyAdapter Interface.
+     */
 	private class TAdapter extends KeyAdapter
 	{
 		@Override
@@ -112,6 +128,12 @@ public class GameBoard extends JPanel implements Constants, Observer
 		}
 	}
 
+	 /*
+     * Function Name: paint
+     * Parameters In: Graphics
+     * Parameters Out: None
+     * Description: Draws the paddle and bricks based on current state of the game.
+     */
 	public void paint(Graphics graphics)
 	{
 		super.paint(graphics);
@@ -175,8 +197,12 @@ public class GameBoard extends JPanel implements Constants, Observer
 		graphics.dispose();
 	}
 
-	
-	//List of game objects to be painted
+	/*
+     * Function Name: unpackShapeList
+     * Parameters In: ArrayList<Object>
+     * Parameters Out: None
+     * Description: Calls the corresponding method based on calling object after unpacking the list.
+     */
 	private void unpackShapeList(ArrayList<Object> gameObjectList)
 	{
 		//List contains flag, ball, bricks, paddle
@@ -199,7 +225,12 @@ public class GameBoard extends JPanel implements Constants, Observer
 		}
 	}
 	
-	//Update notification for observer
+	/*
+     * Function Name: update
+     * Parameters In: Observable,Object
+     * Parameters Out: None
+     * Description: Update notification for observer.
+     */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Observable observable, Object objectList)
