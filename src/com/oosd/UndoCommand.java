@@ -25,6 +25,6 @@ public class UndoCommand implements Command
 	@Override
 	public void execute()
 	{
-		gameObservable.undoTesting();
+		gameObservable.undoOneStep();
 	}
 }
