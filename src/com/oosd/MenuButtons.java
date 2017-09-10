@@ -11,13 +11,6 @@ import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-/**
- * Class ControlButtons - It acts as the panel for all the buttons and has all
- * the action listeners of the buttons.
- * 
- *
- */
-
 public class MenuButtons extends JPanel implements Observer 
 {
 	private static final long serialVersionUID = 1L;

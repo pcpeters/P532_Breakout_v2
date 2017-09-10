@@ -2,13 +2,6 @@ package com.oosd;
 
 import java.util.ArrayList;
 
-/**
- * GameData class
- * 
- * Sprite data i.e. the x and y coordinates of ball and paddle and bricks
- *
- */
-
 public class GameObjectCoordinates 
 {
 	private int gameFlag;

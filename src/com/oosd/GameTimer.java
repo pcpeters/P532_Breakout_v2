@@ -11,14 +11,6 @@ import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/**
- * Class DisplayClock - this acts as the Observer and updates itself after every
- * 1 second .
- * 
- * update() - updates DisplayClock observer according to notification from
- * observable
- */
-
 public class GameTimer implements Observer
 {
 	JPanel jp = new JPanel();

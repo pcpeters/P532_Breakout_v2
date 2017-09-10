@@ -2,12 +2,8 @@ package com.oosd;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 
-/**
- * @author
- */
 public class Breakout extends JFrame implements Constants
 {	
 	private static final long serialVersionUID = 1L;
@@ -27,7 +23,36 @@ public class Breakout extends JFrame implements Constants
 	    initUI(game, menu);
 	    setMinimumSize(this.getSize());
     }
+	    
+	private void initUI(GameBoard game, MenuBoard menu) 
+	{
+		setLayout(new BorderLayout());
+		add(game);
+		add(menu, BorderLayout.SOUTH);
+		pack();
+		setTitle("Breakout");
+		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		setResizable(true);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
 
+	public static void main(String[] args) 
+	{
+		EventQueue.invokeLater(new Runnable() {
+		@Override
+		public void run()
+		{
+			Breakout gameDriver = new Breakout();           
+	        gameDriver.setVisible(true);
+	        gameDriver.getControlButtons().setGameDriver(gameDriver);
+	        gameDriver.getControlButtons().setClock(gameDriver.getDisplayClock());
+	        gameDriver.getControlButtons().setGame(gameDriver.getGameBoard());
+			}
+	    });
+	}
+	
+	//Getters and Setters
+	
 	public GameObservable getTimerObs()
 	{
 		return gameObservable;
@@ -66,32 +91,5 @@ public class Breakout extends JFrame implements Constants
 	public GameTimer getDisplayClock()
 	{
 	   	return clock;
-	}
-	    
-	private void initUI(GameBoard game, MenuBoard menu) 
-	{
-		setLayout(new BorderLayout());
-		add(game);
-		add(menu, BorderLayout.SOUTH);
-		pack();
-		setTitle("Breakout");
-		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-		setResizable(true);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-	}
-
-	public static void main(String[] args) 
-	{
-		EventQueue.invokeLater(new Runnable() {
-		@Override
-		public void run()
-		{
-			Breakout gameDriver = new Breakout();           
-	        gameDriver.setVisible(true);
-	        gameDriver.getControlButtons().setGameDriver(gameDriver);
-	        gameDriver.getControlButtons().setClock(gameDriver.getDisplayClock());
-	        gameDriver.getControlButtons().setGame(gameDriver.getGameBoard());
-			}
-	    });
 	}
 }

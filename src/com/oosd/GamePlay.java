@@ -140,22 +140,18 @@ public class GamePlay implements Constants
 		}
 	}
 
-	/*
-	 * Function to return an ArrayList of current objects for the game.
-	 * 
-	 * @return objectList returns a list of objects which contains game sprites,
-	 * time and current layout
-	 */
-	public ArrayList<Object> getListShapeObjects() 
+	public ArrayList<Object> getGameObjectList() 
 	{
-		ArrayList<Object> objectList = new ArrayList<Object>();
-		objectList.add(Integer.valueOf(this.getGameFlag()));
-		objectList.add(this.getBall());
-		objectList.add(this.getBricks());
-		objectList.add(this.getPaddle());
-		objectList.add(this.timeForGameTimer);
-		objectList.add(this.getLayoutState());
-		return objectList;
+		ArrayList<Object> gameObjectList = new ArrayList<Object>();
+		
+		gameObjectList.add(Integer.valueOf(this.getGameFlag()));
+		gameObjectList.add(this.getBall());
+		gameObjectList.add(this.getBricks());
+		gameObjectList.add(this.getPaddle());
+		gameObjectList.add(this.timeForGameTimer);
+		gameObjectList.add(this.getLayoutState());
+		
+		return gameObjectList;
 	}
 
 	//List of brick status to check is brick is destroyed
@@ -183,11 +179,6 @@ public class GamePlay implements Constants
 		return gameStateList;
 	}
 
-	/*
-	 * Function to save the coordinates and states for all game objects.
-	 * 
-	 * @param objectList contains the game sprite coordinates and game data
-	 */
 	public void saveGameState(GameState gameStateList) 
 	{
 		//Save state of ball
@@ -247,12 +238,6 @@ public class GamePlay implements Constants
 		timerTracker = 0;
 	}
 
-	/*
-	 * Function to update the display of the clock in the panel according to
-	 * timer tick.
-	 * 
-	 * @return returns the string to be set in the time label of the panel.
-	 */
 	public String updateGameTimer() 
 	{
 		timerTracker++;
@@ -269,11 +254,6 @@ public class GamePlay implements Constants
 		return timeForGameTimer;
 	}
 
-	/*
-	 * Function to check collision of ball with bricks. Sets game flag to 2 to
-	 * indicate that the game is over if the ball falls below paddle. Removes a
-	 * brick if the ball hits it.
-	 */
 	public void checkCollision() 
 	{
 		//Game over
@@ -305,8 +285,7 @@ public class GamePlay implements Constants
 				Point pointRight = new Point(ballLeft + ballWidth + 1, ballTop);
 				Point pointLeft = new Point(ballLeft - 1, ballTop);
 				Point pointTop = new Point(ballLeft, ballTop - 1);
-				Point pointBottom = new Point(ballLeft, ballTop + ballHeight
-						+ 1);
+				Point pointBottom = new Point(ballLeft, ballTop + ballHeight + 1);
 				
 			
 				

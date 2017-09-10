@@ -5,18 +5,9 @@ import java.awt.FlowLayout;
 
 import javax.swing.JPanel;
 
-/**
- * MenuBoard class
- * 
- * Adds panels to control buttons and clock in the game frame.
- *
- */
 @SuppressWarnings("serial")
 public class MenuBoard extends JPanel implements Constants
 {
-	/*
-	 * Constructor to initialize panel for buttons and clock
-	 */
 	public MenuBoard(GameBoard game, MenuButtons controlButtons, GameTimer clock) 
 	{
 		FlowLayout layout = new FlowLayout();
