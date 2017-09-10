@@ -6,8 +6,6 @@ import java.util.Observable;
 
 import javax.swing.Timer;
 
-//Observable class that notifies observers to update state
-
 public class GameObservable extends Observable {
 	private GamePlay gamePlayObj;
 	private Timer timer;
@@ -23,15 +21,11 @@ public class GameObservable extends Observable {
 	private LinkedList<Object> ReplayList = new LinkedList<Object>();
 	private ArrayList<Object> shapeObjects;
 
-	
-
 	/*
-     * Parameters In: Only in case of setters
-     * Parameters Out: Only in case of getters
-     * Description: Getters and Setters for class members.
-     */
+	 * Parameters In: Only in case of setters Parameters Out: Only in case of
+	 * getters Description: Getters and Setters for class members.
+	 */
 
-	
 	public boolean isLoadGame() {
 		return loadGame;
 	}
@@ -96,13 +90,10 @@ public class GameObservable extends Observable {
 		this.timer = timer;
 	}
 
-	
-	 /*
-     * Function Name: GameObservable
-     * Parameters In: None
-     * Parameters Out: None
-     * Description: Initializes the GameObservable object.
-     */
+	/*
+	 * Function Name: GameObservable Parameters In: None Parameters Out: None
+	 * Description: Initializes the GameObservable object.
+	 */
 
 	public GameObservable() {
 		gamePlayObj = new GamePlay();
@@ -110,12 +101,10 @@ public class GameObservable extends Observable {
 		replayFrameCounter = 0;
 	}
 
-	 /*
-     * Function Name: computeAndNotify
-     * Parameters In: None
-     * Parameters Out: None
-     * Description: Notifies the observer.
-     */
+	/*
+	 * Function Name: computeAndNotify Parameters In: None Parameters Out: None
+	 * Description: Notifies the observer.
+	 */
 	public void computeAndNotify() {
 		timer.addActionListener(e -> {
 			if (gameFlag && !replayFlag) {
@@ -163,11 +152,9 @@ public class GameObservable extends Observable {
 	}
 
 	/*
-     * Function Name: undoOneStep
-     * Parameters In: None
-     * Parameters Out: None
-     * Description: Removes last object from list for undo.
-     */
+	 * Function Name: undoOneStep Parameters In: None Parameters Out: None
+	 * Description: Removes last object from list for undo.
+	 */
 	public void undoOneStep() {
 		timer.stop();
 		if (CommandHistoryList.size() != 0) {
@@ -182,22 +169,18 @@ public class GameObservable extends Observable {
 	}
 
 	/*
-     * Function Name: pauseGame
-     * Parameters In: None
-     * Parameters Out: None
-     * Description: Stops the timer of the corresponding timer.
-     */
+	 * Function Name: pauseGame Parameters In: None Parameters Out: None
+	 * Description: Stops the timer of the corresponding timer.
+	 */
 	public void pauseGame() {
 		getTimer().stop();
 	}
 
 	/*
-     * Function Name: resumeGame
-     * Parameters In: None
-     * Parameters Out: None
-     * Description: Sets the time and notifies the observer.
-     */
-	
+	 * Function Name: resumeGame Parameters In: None Parameters Out: None
+	 * Description: Sets the time and notifies the observer.
+	 */
+
 	public void resumeGame() {
 		if (isLoadGame()) {
 			computeAndNotify();
