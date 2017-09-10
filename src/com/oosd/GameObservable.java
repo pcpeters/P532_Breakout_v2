@@ -177,7 +177,7 @@ public class GameObservable extends Observable
 	}
 
 	//Removes last object from list for undo
-	public void undoTesting()
+	public void undoOneStep()
 	{
 		this.timer.stop();
 		if (CommandHistoryList.size() != 0)
