@@ -1,8 +1,12 @@
 package com.oosd;
 
+import org.apache.log4j.Logger;
+
 public class UndoCommand implements Command
 {
 	private GameObservable gameObservable;
+	
+	public static final Logger log = Logger.getLogger(UndoCommand.class);
 
 	/*
      * Function Name: UndoCommand
@@ -26,5 +30,6 @@ public class UndoCommand implements Command
 	public void execute()
 	{
 		gameObservable.undoOneStep();
+		log.info("Undo command");
 	}
 }

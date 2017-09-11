@@ -70,11 +70,11 @@ public class Breakout extends JFrame implements Constants
 		@Override
 		public void run()
 		{
-			Breakout gameDriver = new Breakout();           
-	        gameDriver.setVisible(true);
-	        gameDriver.getControlButtons().setGameDriver(gameDriver);
-	        gameDriver.getControlButtons().setClock(gameDriver.getDisplayClock());
-	        gameDriver.getControlButtons().setGame(gameDriver.getGameBoard());
+			Breakout breakout = new Breakout();           
+	        breakout.setVisible(true);
+	        breakout.getControlButtons().setBreakout(breakout);
+	        breakout.getControlButtons().setClock(breakout.getDisplayClock());
+	        breakout.getControlButtons().setGame(breakout.getGameBoard());
 			}
 	    });
 	}

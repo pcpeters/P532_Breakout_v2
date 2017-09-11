@@ -1,8 +1,12 @@
 package com.oosd;
 
+import org.apache.log4j.Logger;
+
 public class ReplayCommand implements Command
 {
 	private GameObservable gameObservable;
+	
+	public static final Logger log = Logger.getLogger(ReplayCommand.class);
 	
 	/*
      * Function Name: ReplayCommand
@@ -26,5 +30,6 @@ public class ReplayCommand implements Command
 	{
 		gameObservable.setGameFlag(false);
 		gameObservable.computeAndNotify();
+		log.info("Replay command");
 	}
 }

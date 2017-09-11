@@ -4,8 +4,12 @@ import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 public class GamePlay implements Constants
 {
+	public static final Logger log = Logger.getLogger(GamePlay.class);
+	
 	private Ball ball;
 	private Paddle paddle;
 	private Brick[] bricks;
@@ -326,6 +330,7 @@ public class GamePlay implements Constants
 		//Game over
 		if (ball.getY() + ball.getHeight() > (Constants.WINDOW_HEIGHT - 82))
 		{
+			log.info("Game over.");
 			setGameFlag(2);
 		}
 		
@@ -333,6 +338,7 @@ public class GamePlay implements Constants
 		if(((ball.getX() + ball.getWidth() >= paddle.getX()) && (ball.getX() <= paddle.getX() + paddle.getWidth())) &&
 				(((ball.getY() + ball.getHeight()) >= paddle.getY())) && (ball.getY() <= (paddle.getY() + paddle.getHeight())) ) {
 
+			log.info("Paddle hit.");
 			ball.setYDir(-ball.getYDir());
 		}		
 		
@@ -374,6 +380,7 @@ public class GamePlay implements Constants
 					}
 					
 					bricks[i].setDestroyed(true);
+					log.info("Brick destroyed.");
 				}
 			}
 		}

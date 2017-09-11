@@ -11,8 +11,12 @@ import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import org.apache.log4j.Logger;
+
 public class MenuButtons extends JPanel implements Observer 
 {
+	public static final Logger log = Logger.getLogger(MenuButtons.class);
+	
 	private static final long serialVersionUID = 1L;
 	
 	private Command command;	
@@ -63,6 +67,7 @@ public class MenuButtons extends JPanel implements Observer
 			@Override
 			public void actionPerformed(ActionEvent ae) 
 			{
+				
 				pause_bt.setEnabled(true);
 				undo_bt.setEnabled(true);
 				replay_bt.setEnabled(false);
@@ -141,6 +146,7 @@ public class MenuButtons extends JPanel implements Observer
 				undoCmd = new UndoCommand(gameObservable);
 				setCommand(undoCmd);
 				press();
+				
 			}
 		});
 
@@ -158,6 +164,7 @@ public class MenuButtons extends JPanel implements Observer
 				gameObservable.addObserver((Observer) breakout.getGameBoard());
 				gameObservable.addObserver((Observer) breakout.getDisplayClock());
 				gameObservable.addObserver((Observer) breakout.getControlButtons());
+				
 				replyCmd = new ReplayCommand(gameObservable);
 				setCommand(replyCmd);
 				press();
@@ -243,11 +250,11 @@ public class MenuButtons extends JPanel implements Observer
 		command.execute();
 	}
 
-	public void setGameDriver(Breakout gameDriver) {
-		this.breakout = gameDriver;
+	public void setBreakout(Breakout breakout) {
+		this.breakout = breakout;
 	}
 
-	public Breakout getGameDriver() {
+	public Breakout getBreakout() {
 		return breakout;
 	}
 

@@ -6,7 +6,12 @@ import java.util.Observable;
 
 import javax.swing.Timer;
 
+import org.apache.log4j.Logger;
+
 public class GameObservable extends Observable {
+	
+	public static final Logger log = Logger.getLogger(GameObservable.class);
+	
 	private GamePlay gamePlayObj;
 	private Timer timer;
 
@@ -106,9 +111,11 @@ public class GameObservable extends Observable {
 	 * Description: Notifies the observer.
 	 */
 	public void computeAndNotify() {
+		
 		timer.addActionListener(e -> {
 			if (gameFlag && !replayFlag) {
-				// System.out.println("Game running..");
+				
+				//Game running				
 				if (count % 10 == 0) {
 					CommandHistoryList.add(getGamePlayObj().getGameStateList());
 				}
@@ -119,20 +126,24 @@ public class GameObservable extends Observable {
 				setChanged();
 				notifyObservers(shapeObjects);
 				count++;
-			} else {
-				// System.out.println("Replay..");
-
-				GameState storeDimensions;
+			} 
+			else {
+				
+				//Replay
+				GameState gameState;
 				if (replayFrameCounter < ReplayList.size()) {
-					storeDimensions = (GameState) ReplayList.get(replayFrameCounter);
-					getGamePlayObj().saveGameState(storeDimensions);
+					gameState = (GameState) ReplayList.get(replayFrameCounter);
+					getGamePlayObj().saveGameState(gameState);
 					setChanged();
 					shapeObjects = getGamePlayObj().getGameObjectList();
 					setChanged();
 					notifyObservers(shapeObjects);
 					replayFrameCounter++;
-				} else {
-					// System.out.println("Replay over");
+				} 
+				
+				else {
+					
+					//Replay over - reset frame counter
 					replayFrameCounter = 0;
 					setGameFlag(true);
 					timer.stop();
@@ -141,7 +152,7 @@ public class GameObservable extends Observable {
 			}
 
 			if (getGamePlayObj().getGameFlag() == 2) {
-				// System.out.println("Game Over");
+				//Game over
 				deleteObservers();
 				timer.stop();
 			}
@@ -156,8 +167,12 @@ public class GameObservable extends Observable {
 	 * Description: Removes last object from list for undo.
 	 */
 	public void undoOneStep() {
+		
+		log.info("Undo one step.");
 		timer.stop();
+		
 		if (CommandHistoryList.size() != 0) {
+			
 			final GameState lastGameState = (GameState) CommandHistoryList.removeLast();
 			getGamePlayObj().saveGameState(lastGameState);
 			ReplayList.add(lastGameState);
@@ -173,6 +188,7 @@ public class GameObservable extends Observable {
 	 * Description: Stops the timer of the corresponding timer.
 	 */
 	public void pauseGame() {
+		
 		getTimer().stop();
 	}
 
@@ -182,6 +198,8 @@ public class GameObservable extends Observable {
 	 */
 
 	public void resumeGame() {
+		
+		log.info("Resume game.");
 		if (isLoadGame()) {
 			computeAndNotify();
 		}

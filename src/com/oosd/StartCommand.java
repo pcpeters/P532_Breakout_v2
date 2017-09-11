@@ -1,8 +1,11 @@
 package com.oosd;
 
+import org.apache.log4j.Logger;
+
 public class StartCommand implements Command
 {
 	private GameObservable gameObservable;
+	public static final Logger log = Logger.getLogger(StartCommand.class);
 
 	/*
      * Function Name: StartCommand
@@ -26,5 +29,7 @@ public class StartCommand implements Command
 	{
 		gameObservable.setGameFlag(true);
 		gameObservable.computeAndNotify();
+		
+		log.info("Start command");
 	}
 }

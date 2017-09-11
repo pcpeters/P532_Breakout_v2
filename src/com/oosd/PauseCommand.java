@@ -1,8 +1,12 @@
 package com.oosd;
 
+import org.apache.log4j.Logger;
+
 public class PauseCommand implements Command
 {
 	private GameObservable gameObservable;
+	
+	public static final Logger log = Logger.getLogger(PauseCommand.class);
 
 	/*
      * Function Name: PauseCommand
@@ -25,5 +29,6 @@ public class PauseCommand implements Command
 	public void execute()
 	{
 		gameObservable.pauseGame();
+		log.info("Pause command");
 	}
 }
