@@ -3,9 +3,14 @@ package com.oosd;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
+import org.apache.log4j.PropertyConfigurator;
+
+import org.apache.log4j.Logger;
 
 public class Breakout extends JFrame implements Constants
 {	
+	public static final Logger log = Logger.getLogger(Breakout.class);
+	
 	private static final long serialVersionUID = 1L;
 	private GameBoard game;
     private MenuBoard menu;
@@ -21,6 +26,7 @@ public class Breakout extends JFrame implements Constants
      */
     public Breakout()
     {
+    	log.info("Initializing the Breakout game.");
 	   	game = new GameBoard();
 	    menuButtons = new MenuButtons(game);
 	    game.controls = menuButtons;
@@ -39,6 +45,7 @@ public class Breakout extends JFrame implements Constants
      */
 	private void initUI(GameBoard game, MenuBoard menu) 
 	{
+		log.info("Setting the layout.");
 		setLayout(new BorderLayout());
 		add(game);
 		add(menu, BorderLayout.SOUTH);
@@ -57,6 +64,8 @@ public class Breakout extends JFrame implements Constants
      */
 	public static void main(String[] args) 
 	{
+		PropertyConfigurator.configure("log4j.properties");
+		
 		EventQueue.invokeLater(new Runnable() {
 		@Override
 		public void run()
