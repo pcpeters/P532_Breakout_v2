@@ -11,10 +11,14 @@ import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.apache.log4j.Logger;
+
 public class GameTimer implements Observer
 {
 	JPanel jp = new JPanel();
 	JLabel time = new JLabel("00:00");
+	
+	public static final Logger log = Logger.getLogger(GameTimer.class);
 
 	/*
      * Function Name: GameTimer
@@ -40,7 +44,7 @@ public class GameTimer implements Observer
      */
 	
 	@Override
-	public void update(Observable oservable, Object objectList)
+	public void update(Observable observable, Object objectList)
 	{
 		if (!(objectList instanceof LinkedList<?>))
 		{
@@ -52,7 +56,6 @@ public class GameTimer implements Observer
 			else if (obj.get(obj.size() - 2) instanceof String)
 			{
 				time.setText(obj.get(obj.size() - 2).toString());
-
 			}
 		}
 	}
